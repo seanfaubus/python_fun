@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import timedelta, date, datetime
 import csv
 import os
 import smtplib
@@ -23,12 +23,24 @@ dates_dict = {occasions[i]: dates[i] for i in range(len(occasions))}
 
 # get today's date
 today = datetime.today().date()
+# get a a week in advance
+delta = timedelta(days=7)
 
 
-# compare today's date to the dates of special occasions
+advance = str(today + delta)
+today_str = str(today)
+
+
+# ***FIXME***
+# figure out how to compare month and day ONLY
+
+# compare today's date and a week ahead to the dates of special occasions
 for date in dates:
 	date = datetime.strptime(date, '%Y-%m-%d').date()
-	if today == date:
+	date_to_string = str(date)
+	if advance[4:] == date_to_string[4:] or today_str[4:] == date_to_string[4:]:
+		# print('yes')
+
 		special_date = datetime.strftime(date, '%Y-%m-%d')
 		
 
@@ -43,9 +55,11 @@ for date in dates:
 
 			smtp.login(email_address, email_password)
 
+
 			subject = 'Heyo!'
 			body = f'Seany,',special_date, 'is a very important date!'
 
 			msg = f'Subject: {subject}\n\n{body}'
 
 			smtp.sendmail(email_address, 'seanfaubus@gmail.com', msg)
+
