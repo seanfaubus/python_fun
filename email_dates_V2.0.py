@@ -46,14 +46,14 @@ for date in dates:
 		# print(f'The special day is {dates_dict[special_date]}')
 		
 
-		email_address = os.environ.get('PYTHON_EMAIL')
-		email_password = os.environ.get('PYTHON_PASS')
+		email_address = os.environ.get('YourCustomEnvVar')
+		email_password = os.environ.get('YourCustomEnvVar')
 
 
 		msg = EmailMessage()
 		msg['Subject'] = 'An Important Day Is Nigh'
 		msg['From'] = email_address
-		msg['To'] = seanfaubus@gmail.com
+		msg['To'] = youremail@address.com
 		msg.set_content(f'Seany, \n{special_date} is a very important date! I hope you are ready to celebrate {dates_dict[special_date]}!')
 
 
